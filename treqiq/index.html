@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://trendect.online/style.css?t=1731911842">
+<script>
+        function getURLParameters() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const u_ax = urlParams.get('u');  // 'u'パラメータの値を取得
+            const p_ax = urlParams.get('p');  // 'p'パラメータの値を取得
+        }
+
+        // ページが読み込まれたときに実行
+        window.onload = getURLParameters;
+    </script>
+    <title>ログインフォーム</title>
+</head>
+<body>
+    <div id="rlform">
+        <img src="new_logo.svg" alt="ロゴ" class="t_logo">
+    <form method="post" action="https://trendect.online/run_login.php" id="loginForm">
+        <label>ID</label><br>
+        <input name="userid" type="text" class="oi"><br>
+        <label>パスワード</label><br>
+        <input name="password" type="password" class="oi"><br>
+        <input type="submit" class="bt1" value="ログイン">
+    </form>
+</div>
+    <script>
+        function setInputValueAndSubmit() {
+            const useridElement = document.querySelector('input[name="userid"]');
+            useridElement.value = u_ax; // ユーザーIDを入力
+
+            const passwordElement = document.querySelector('input[name="password"]');
+            passwordElement.value = p_ax; // パスワードを入力
+
+            // フォームを自動的に送信
+            const formElement = document.getElementById('loginForm');
+            formElement.submit();
+        }
+
+        // ページが読み込まれた後に自動実行
+        window.onload = setInputValueAndSubmit;
+    </script>
+</body>
+</html>
