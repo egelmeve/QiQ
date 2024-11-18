@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー情報管理</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .user-list {
+            margin-top: 20px;
+        }
+        .user-item {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<h1>ユーザーIDとパスワード入力</h1>
+<input type="text" id="userId" placeholder="ユーザーID">
+<br>
+<input type="password" id="password" placeholder="パスワード">
+<br>
+<button id="addButton">追加</button>
+
+<div class="user-list" id="userList">
+    <h2>保存されたユーザーID:</h2>
+    <!-- ユーザーIDリストはここに表示されます -->
+</div>
+
+<script>
+    document.getElementById('addButton').addEventListener('click', function() {
+        const userId = document.getElementById('userId').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        // ローカルストレージにユーザー情報を保存
+        if (userId !== "") {
+            // 既存のユーザーIDのリストを取得
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+            // ユーザーIDがすでにリストにない場合は追加
+            if (!users.includes(userId)) {
+                users.push(userId);
+                localStorage.setItem('users', JSON.stringify(users));
+                displayUsers(); // ユーザーリストの表示を更新
+            }
+            // ユーザーIDのリンクとして表示
+            if (userId !== "") {
+                const url = `https://qiq.i-i.f5.si/treqiq/?u=${encodeURIComponent(userId)}&p=${encodeURIComponent(password)}`;
+                window.open(url, '_blank');
+            }
+        }
+    });
+
+    function displayUsers() {
+        const userListElement = document.getElementById('userList');
+        userListElement.innerHTML = '<h2>保存されたユーザーID:</h2>'; // ヘッダー
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        users.forEach(userId => {
+            const userItem = document.createElement('div');
+            userItem.textContent = userId;
+            userItem.classList.add('user-item');
+            userItem.onclick = function() {
+                alert(`ユーザーID: ${userId}`);
+            };
+            userListElement.appendChild(userItem);
+        });
+    }
+
+    // ページロード時にユーザーリストを表示
+    displayUsers();
+</script>
+
+</body>
+</html>
