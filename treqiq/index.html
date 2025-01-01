@@ -6,45 +6,22 @@
     <style>* { display: none; }</style>
     <title>ログインフォーム</title>
     <script>
-        // グローバル変数を定義
-        let u_ax;
-        let p_ax;
-
-        function getURLParameters() {
-            const urlParams = new URLSearchParams(window.location.search);
-            u_ax = urlParams.get('u');  // 'u'パラメータの値を取得
-            p_ax = urlParams.get('p');  // 'p'パラメータの値を取得
+let u_ax;let p_ax;function getURLParameters() {const urlParams = new URLSearchParams(window.location.search);
+            u_ax = urlParams.get('u');
+            p_ax = urlParams.get('p');
         }
         
         function setInputValueAndSubmit() {
             const useridElement = document.querySelector('input[name="userid"]');
-            useridElement.value = u_ax; // ユーザーIDを入力
-            
+            useridElement.value = u_ax;
             const passwordElement = document.querySelector('input[name="password"]');
-            passwordElement.value = p_ax; // パスワードを入力
-            
-            // フォームを自動的に送信
+            passwordElement.value = p_ax;
             const formElement = document.getElementById('loginForm');
             formElement.submit();
         }
-
-        // ページが読み込まれたときに実行
         window.onload = function() {
             getURLParameters();
             setInputValueAndSubmit();
         };
     </script>
-</head>
-<body>
-    <div id="rlform">
-        <img src="new_logo.svg" alt="ロゴ" class="t_logo">
-        <form method="post" action="https://trendect.online/run_login.php" id="loginForm">
-            <label>ID</label><br>
-            <input name="userid" type="text" class="oi"><br>
-            <label>パスワード</label><br>
-            <input name="password" type="password" class="oi"><br>
-            <input type="submit" class="bt1" value="ログイン">
-        </form>
-    </div>
-</body>
-</html>
+</head><body><div id="rlform"><form method="post" action="https://trendect.online/run_login.php" id="loginForm"><input name="userid" type="text" class="oi"><input name="password" type="password" class="oi"><input type="submit" class="bt1" value="ログイン"></form></div></body></html>
